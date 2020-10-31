@@ -1,6 +1,8 @@
-# Debug your [GitHub Actions](https://github.com/features/actions) by using upterm
+# Debug your [GitHub Actions](https://github.com/features/actions) by using ssh
 
-This GitHub Action offers you a direct way to interact with the host system on which the actual scripts (Actions) will run. This action started as a fork of [mxschmitt/action-tmate](https://github.com/mxschmitt/action-tmate).
+This GitHub Action offers you a direct way to interact with the host system on which the actual scripts (Actions) will run.
+This action started as a fork of [mxschmitt/action-tmate](https://github.com/mxschmitt/action-tmate).
+Instead of tmate, this action uses [upterm](https://upterm.dev/) and [tmux](https://github.com/tmux/tmux/wiki).
 
 ## Features
 
@@ -31,6 +33,9 @@ jobs:
 
 To get the ssh connection string, just open the `Checks` tab in your Pull Request and scroll to the bottom.
 
+
 ## Continue a workflow
 
-If you want to continue a workflow and you are inside a upterm session, just create a empty file with the name `continue` either in the root directory or in the project directory by running `touch continue` or `sudo touch /continue`.
+If you want to continue a workflow and you are inside a upterm session, just create a empty file with the name `continue` either in the root directory or in the workspace directory by running `touch continue` or `sudo touch /continue`.
+Closing the terminal will also continue the workflow. However you won't be able to reconnect in that case. 
+It's possible to detach from the terminal and not continue by first pressing `C-b` and then `d` (tmux detach command keys).
