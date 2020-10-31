@@ -26,7 +26,8 @@ export async function run() {
     } catch { }
     core.debug("Generated SSH-Key successfully")
     core.debug("Configuring ssh client")
-    fs.appendFileSync(path.join(os.homedir(), ".ssh/config"), "Host *\nStrictHostKeyChecking no\nCheckHostIP no\n")
+    fs.appendFileSync(path.join(os.homedir(), ".ssh/config"), "Host *\nStrictHostKeyChecking no\nCheckHostIP no\n" +
+      "TCPKeepAlive yes\nServerAliveInterval 30\nServerAliveCountMax 180\n")
     // entry in known hosts file in mandatory in upterm. attempt ssh connection to upterm server
     // to get the host key added to ~/.ssh/known_hosts
     try {
