@@ -18,8 +18,13 @@ export async function run() {
     await execShellCommand("brew install owenthereal/upterm/upterm")
     core.debug("Installed dependencies successfully")
 
-    core.debug("Configuring ssh client")
+    core.debug("Generating SSH keys")
     fs.mkdirSync(path.join(os.homedir(), ".ssh"), { recursive: true })
+    try {
+      await execShellCommand(`echo -e 'y\n'|ssh-keygen -q -t rsa -N "" -f ~/.ssh/id_rsa`);
+    } catch { }
+    core.debug("Generated SSH-Key successfully")
+    core.debug("Configuring ssh client")
     fs.appendFileSync(path.join(os.homedir(), ".ssh/config"), "Host *\nStrictHostKeyChecking no\n")
 
     core.debug("Creating new session")
