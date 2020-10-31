@@ -34,6 +34,7 @@ export async function run() {
     } catch { }
     core.debug("Creating new session")
     await execShellCommand("tmux new -d -s upterm-wrapper \"upterm host --force-command 'tmux attach -t upterm' -- tmux new -s upterm\"")
+    await new Promise(r => setTimeout(r, 2000))
     await execShellCommand("tmux send-keys -t upterm-wrapper q C-m")
     console.debug("Created new session successfully")
 
