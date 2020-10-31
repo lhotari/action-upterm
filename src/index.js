@@ -26,7 +26,11 @@ export async function run() {
     core.debug("Generated SSH-Key successfully")
     core.debug("Configuring ssh client")
     fs.appendFileSync(path.join(os.homedir(), ".ssh/config"), "Host *\nStrictHostKeyChecking no\nCheckHostIP no\n")
-
+    // entry in known hosts file in mandatory in upterm. attempt ssh connection to upterm server
+    // to get the host key added to ~/.ssh/known_hosts
+    try {
+      await execShellCommand("ssh uptermd.upterm.dev")
+    } catch { }
     core.debug("Creating new session")
     await execShellCommand("upterm host -- bash")
     console.debug("Created new session successfully")
