@@ -1,6 +1,7 @@
 name: 'Debugging with ssh'
 description: 'Debug your GitHub Actions Environment interactively by using SSH'
 author: 'Lari Hotari'
+icon: 'terminal'
 runs:
   using: 'node12'
   main: 'lib/index.js'
