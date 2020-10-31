@@ -20,7 +20,7 @@ export async function run() {
 
     core.debug("Configuring ssh client")
     fs.mkdirSync(path.join(os.homedir(), ".ssh"), { recursive: true })
-    fs.appendFileSync(".ssh/config", "Host *\nStrictHostKeyChecking no\n")
+    fs.appendFileSync(path.join(os.homedir(), ".ssh/config"), "Host *\nStrictHostKeyChecking no\n")
 
     core.debug("Creating new session")
     await execShellCommand("upterm host -- bash")
