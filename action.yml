@@ -1,0 +1,6 @@
+name: 'Debugging with upterm'
+description: 'Debug your GitHub Actions Environment interactively by using SSH'
+author: 'Lari Hotari'
+runs:
+  using: 'node12'
+  main: 'lib/index.js'
