@@ -40,11 +40,10 @@ export async function run() {
 
     core.debug("Fetching connection strings")
     await new Promise(r => setTimeout(r, 1000))
-    const uptermSessionInfo = await execShellCommand('bash -c "upterm session current --admin-socket ~/.upterm/*.sock"');
 
     console.debug("Entering main loop")
     while (true) {
-      core.info(`${uptermSessionInfo}`);
+      core.info(await execShellCommand('bash -c "upterm session current --admin-socket ~/.upterm/*.sock"'));
 
       const skip = fs.existsSync("/continue") || fs.existsSync(path.join(process.env.GITHUB_WORKSPACE, "continue"))
       if (skip) {
