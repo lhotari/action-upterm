@@ -16,6 +16,7 @@ export async function run() {
 
     core.debug("Installing dependencies")
     await execShellCommand("brew install owenthereal/upterm/upterm")
+    await execShellCommand("brew install tmux")
     core.debug("Installed dependencies successfully")
 
     core.debug("Generating SSH keys")
@@ -32,11 +33,12 @@ export async function run() {
       await execShellCommand("ssh uptermd.upterm.dev")
     } catch { }
     core.debug("Creating new session")
-    await execShellCommand("upterm host -- bash")
+    await execShellCommand("tmux new -d -s upterm-wrapper \"upterm host --force-command 'tmux attach -t upterm' -- tmux new -s upterm\"")
+    await execShellCommand("tmux send-keys -t upterm-wrapper q C-m")
     console.debug("Created new session successfully")
 
     core.debug("Fetching connection strings")
-    const uptermSessionInfo = await execShellCommand('upterm session current');
+    const uptermSessionInfo = await execShellCommand('bash -c "upterm session current --admin-socket ~/.upterm/*.sock"');
 
     console.debug("Entering main loop")
     while (true) {
