@@ -1,4 +1,4 @@
-name: 'Debugging with upterm'
+name: 'Debugging with ssh'
 description: 'Debug your GitHub Actions Environment interactively by using SSH'
 author: 'Lari Hotari'
 runs:
