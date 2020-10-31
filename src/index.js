@@ -25,7 +25,7 @@ export async function run() {
     } catch { }
     core.debug("Generated SSH-Key successfully")
     core.debug("Configuring ssh client")
-    fs.appendFileSync(path.join(os.homedir(), ".ssh/config"), "Host *\nStrictHostKeyChecking no\n")
+    fs.appendFileSync(path.join(os.homedir(), ".ssh/config"), "Host *\nStrictHostKeyChecking no\nCheckHostIP no\n")
 
     core.debug("Creating new session")
     await execShellCommand("upterm host -- bash")
