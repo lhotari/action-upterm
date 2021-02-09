@@ -27,16 +27,20 @@ export async function run() {
     core.debug("Generating SSH keys")
     fs.mkdirSync(path.join(os.homedir(), ".ssh"), { recursive: true })
     try {
-      await execShellCommand(`echo -e 'y\n'|ssh-keygen -q -t rsa -N "" -f ~/.ssh/id_rsa`);
-    } catch { }
-    core.debug("Generated SSH-Key successfully")
+      await execShellCommand(`ssh-keygen -q -t rsa -N "" -f ~/.ssh/id_rsa; ssh-keygen -q -t ed25519 -N "" -f ~/.ssh/id_ed25519`);
+    } catch { }    
+    core.debug("Generated SSH keys successfully")
     core.debug("Configuring ssh client")
     fs.appendFileSync(path.join(os.homedir(), ".ssh/config"), "Host *\nStrictHostKeyChecking no\nCheckHostIP no\n" +
       "TCPKeepAlive yes\nServerAliveInterval 30\nServerAliveCountMax 180\nVerifyHostKeyDNS yes\nUpdateHostKeys yes\n")
     // entry in known hosts file in mandatory in upterm. attempt ssh connection to upterm server
     // to get the host key added to ~/.ssh/known_hosts
     try {
-      await execShellCommand("ssh uptermd.upterm.dev")
+      await execShellCommand("ssh -i ~/.ssh/id_ed25519 uptermd.upterm.dev")
+    } catch { }
+    // @cert-authority entry is the mandatory entry. generate the entry based on the known_hosts entry key
+    try {
+      await execShellCommand('cat <(cat ~/.ssh/known_hosts | awk \'{ print "@cert-authority * " $2 " " $3 }\') >> ~/.ssh/known_hosts')
     } catch { }
     core.debug("Creating new session")
     await execShellCommand("tmux new -d -s upterm-wrapper \"upterm host --force-command 'tmux attach -t upterm' -- tmux new -s upterm\"")
