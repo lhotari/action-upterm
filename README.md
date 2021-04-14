@@ -39,3 +39,14 @@ To get the ssh connection string, just open the `Checks` tab in your Pull Reques
 If you want to continue a workflow and you are inside a upterm session, just create a empty file with the name `continue` either in the root directory or in the workspace directory by running `touch continue` or `sudo touch /continue`.
 Closing the terminal will also continue the workflow. However you won't be able to reconnect in that case. 
 It's possible to detach from the terminal and not continue by first pressing `C-b` and then `d` (tmux detach command keys).
+
+## Usage tips
+
+### Resizing tmux window
+
+After connecting with ssh:
+* Hit `control-b`, then type `:resize-window -A` + `<enter>`
+
+This will resize the console to the full width and height of the connected terminal.
+([More information](https://unix.stackexchange.com/a/570015))
+
