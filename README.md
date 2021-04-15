@@ -42,7 +42,7 @@ It's possible to detach from the terminal and not continue by first pressing `C-
 
 ## Usage tips
 
-### Resizing tmux window
+### Resizing tmux window (requires ubuntu-latest)
 
 After connecting with ssh:
 * Hit `control-b`, then type `:resize-window -A` + `<enter>`
