@@ -13,7 +13,7 @@ Instead of tmate, this action uses [upterm](https://upterm.dev/) and [tmux](http
 
 - `Linux`
 - `macOS`
-- (`Window` is **not** supported. It will be skipped so that the Pipeline does not fail)
+- (`Windows` is **not** supported. It will be skipped so that the Pipeline does not fail)
 
 ## Getting Started
 
