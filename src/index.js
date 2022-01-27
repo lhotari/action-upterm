@@ -24,12 +24,17 @@ export async function run() {
     }
     core.debug("Installed dependencies successfully")
 
-    core.debug("Generating SSH keys")
-    fs.mkdirSync(path.join(os.homedir(), ".ssh"), { recursive: true })
-    try {
-      await execShellCommand(`ssh-keygen -q -t rsa -N "" -f ~/.ssh/id_rsa; ssh-keygen -q -t ed25519 -N "" -f ~/.ssh/id_ed25519`);
-    } catch { }    
-    core.debug("Generated SSH keys successfully")
+    if (!fs.existsSync(path.join(os.homedir(), ".ssh/id_rsa"))) {
+      core.debug("Generating SSH keys")
+      fs.mkdirSync(path.join(os.homedir(), ".ssh"), { recursive: true })
+      try {
+        await execShellCommand(`ssh-keygen -q -t rsa -N "" -f ~/.ssh/id_rsa; ssh-keygen -q -t ed25519 -N "" -f ~/.ssh/id_ed25519`);
+      } catch { }    
+      core.debug("Generated SSH keys successfully")
+    } else {
+      core.debug("SSH key already exists")
+    }
+    
     core.debug("Configuring ssh client")
     fs.appendFileSync(path.join(os.homedir(), ".ssh/config"), "Host *\nStrictHostKeyChecking no\nCheckHostIP no\n" +
       "TCPKeepAlive yes\nServerAliveInterval 30\nServerAliveCountMax 180\nVerifyHostKeyDNS yes\nUpdateHostKeys yes\n")
