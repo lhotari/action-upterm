@@ -34,7 +34,7 @@ describe('upterm GitHub integration', () => {
     const customConnectionString = "foobar"
     execShellCommand.mockReturnValue(Promise.resolve(customConnectionString))
     await run()
-    expect(execShellCommand).toHaveBeenNthCalledWith(1, "curl -L https://github.com/owenthereal/upterm/releases/download/0.5.2/linux-amd64-v0.5.2.tar.gz | tar zxvf - --strip-components=1 --wildcards '*/upterm' && sudo mv upterm /usr/local/bin/")
+    expect(execShellCommand).toHaveBeenNthCalledWith(1, "curl -sL https://github.com/owenthereal/upterm/releases/download/v0.6.7/upterm_linux_amd64.tar.gz | tar zxvf - -C /tmp upterm && sudo install /tmp/upterm /usr/local/bin/")
     expect(execShellCommand).toHaveBeenNthCalledWith(2, "sudo apt-get -y install tmux")
     expect(core.info).toHaveBeenNthCalledWith(1, `${customConnectionString}`);
     expect(core.info).toHaveBeenNthCalledWith(2, "Exiting debugging session because '/continue' file was created");
