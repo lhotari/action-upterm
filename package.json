@@ -1,9 +1,9 @@
 {
-  "name": "node12-template-action",
+  "name": "action-upterm",
   "version": "0.0.0",
   "private": true,
-  "description": "Node 12 template action",
-  "main": "lib/main.js",
+  "description": "Debug your GitHub Actions via SSH by using upterm/tmux to get access to the runner system itself.",
+  "main": "lib/index.js",
   "scripts": {
     "start": "node src/index.js",
     "build": "ncc build src/main.js -o lib",
@@ -11,12 +11,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/node12-template.git"
+    "url": "git+https://github.com/lhotari/action-upterm.git"
   },
   "keywords": [
     "actions",
-    "node",
-    "setup"
+    "ssh",
+    "debug",
+    "shell"
   ],
   "author": "GitHub",
   "license": "MIT",
