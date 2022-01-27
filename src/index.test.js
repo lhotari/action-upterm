@@ -30,7 +30,7 @@ describe('upterm GitHub integration', () => {
     Object.defineProperty(process, "platform", {
       value: "linux"
     })
-    core.getInput.mockReturnValue("true")
+    core.getInput.mockReturnValue("")
     const customConnectionString = "foobar"
     execShellCommand.mockReturnValue(Promise.resolve(customConnectionString))
     await run()
@@ -43,7 +43,7 @@ describe('upterm GitHub integration', () => {
     Object.defineProperty(process, "platform", {
       value: "darwin"
     })
-    core.getInput.mockReturnValue("true")
+    core.getInput.mockReturnValue("")
     const customConnectionString = "foobar"
     execShellCommand.mockReturnValue(Promise.resolve(customConnectionString))
     await run()

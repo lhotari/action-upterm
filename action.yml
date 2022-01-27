@@ -4,5 +4,18 @@ author: 'Lari Hotari'
 branding:
   icon: 'terminal'
 runs:
-  using: 'node12'
+  using: 'node16'
   main: 'lib/index.js'
+inputs:
+  GITHUB_TOKEN:
+    description: Github Token
+    default: ${{ github.token }}
+    required: false
+  limit-access-to-actor:
+    description: 'If only the public SSH keys of the user triggering the workflow should be authorized'
+    required: false
+    default: 'false'
+  limit-access-to-users:
+    description: 'If only the public SSH keys of the listed GitHub users should be authorized'
+    required: false
+    default: ''    
