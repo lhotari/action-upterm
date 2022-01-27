@@ -112,7 +112,7 @@ export async function run() {
         core.info("Exiting debugging session because '/continue' file was created")
         break
       }
-      await sleep(5000)
+      await sleep(30000)
     }
   } catch (error) {
     core.setFailed(error.message);
