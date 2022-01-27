@@ -57,6 +57,29 @@ jobs:
 If the registered public SSH key is not your default private SSH key, you will need to specify the path manually, like so: `ssh -i <path-to-key> <upterm-connection-string>`.
 
 
+## Use custom upterm server
+
+Follow instructions to [deploy Upterm server to Heroku](https://github.com/owenthereal/upterm#heroku). There are also [other deployment options available](https://github.com/owenthereal/upterm#deploy-uptermd).
+
+You can configure the Upterm server with the `upterm-server` input parameter, for example:
+
+```yaml
+name: CI
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup upterm session
+      uses: lhotari/action-upterm@v1
+      with:
+        ## limits ssh access and adds the ssh public key for the user which triggered the workflow
+        limit-access-to-actor: true
+        ## Use the Heroku deployed Uptermd server via Websocket
+        upterm-server: wss://YOUR_HEROKU_APP_URL
+```
+
 ## Continue a workflow
 
 If you want to continue a workflow and you are inside a upterm session, just create a empty file with the name `continue` either in the root directory or in the workspace directory by running `touch continue` or `sudo touch /continue`.

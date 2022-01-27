@@ -33,6 +33,7 @@
     "@vercel/ncc": "^0.24.0",
     "babel-jest": "^26.3.0",
     "jest": "^26.4.2",
-    "jest-circus": "^26.4.2"
+    "jest-circus": "^26.4.2",
+    "jest-when": "^3.5.0"
   }
 }

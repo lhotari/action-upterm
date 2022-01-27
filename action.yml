@@ -18,4 +18,8 @@ inputs:
   limit-access-to-users:
     description: 'If only the public SSH keys of the listed GitHub users should be authorized'
     required: false
-    default: ''    
+    default: ''
+  upterm-server:
+    description: 'upterm server address (required), supported protocols are ssh, ws, or wss.'
+    required: true
+    default: 'ssh://uptermd.upterm.dev:22'
