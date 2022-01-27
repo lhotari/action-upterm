@@ -44,13 +44,20 @@ export async function run() {
       "TCPKeepAlive yes\nServerAliveInterval 30\nServerAliveCountMax 180\nVerifyHostKeyDNS yes\nUpdateHostKeys yes\n")
     // entry in known hosts file in mandatory in upterm. attempt ssh connection to upterm server
     // to get the host key added to ~/.ssh/known_hosts
-    try {
-      await execShellCommand("ssh -i ~/.ssh/id_ed25519 uptermd.upterm.dev")
-    } catch { }
-    // @cert-authority entry is the mandatory entry. generate the entry based on the known_hosts entry key
-    try {
-      await execShellCommand('cat <(cat ~/.ssh/known_hosts | awk \'{ print "@cert-authority * " $2 " " $3 }\') >> ~/.ssh/known_hosts')
-    } catch { }
+    if (core.getInput("ssh-known-hosts") && core.getInput("ssh-known-hosts") !== "") {
+      core.info("Appending ssh-known-hosts to ~/.ssh/known_hosts. Contents of ~/.ssh/known_hosts:")
+      fs.appendFileSync(path.join(sshPath, "known_hosts"), core.getInput("ssh-known-hosts"))
+      core.info(await execShellCommand('cat ~/.ssh/known_hosts'))
+    } else {
+      core.info("Auto-generating ~/.ssh/known_hosts by attempting connection to uptermd.upterm.dev")
+      try {
+        await execShellCommand("ssh -i ~/.ssh/id_ed25519 uptermd.upterm.dev")
+      } catch { }
+      // @cert-authority entry is the mandatory entry. generate the entry based on the known_hosts entry key
+      try {
+        await execShellCommand('cat <(cat ~/.ssh/known_hosts | awk \'{ print "@cert-authority * " $2 " " $3 }\') >> ~/.ssh/known_hosts')
+      } catch { }
+    }
 
     let authorizedKeysParameter = ""
 

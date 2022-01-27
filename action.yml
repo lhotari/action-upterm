@@ -23,3 +23,7 @@ inputs:
     description: 'upterm server address (required), supported protocols are ssh, ws, or wss.'
     required: true
     default: 'ssh://uptermd.upterm.dev:22'
+  ssh-known-hosts:
+    description: 'Content for ~/.ssh/known_hosts file on the server'
+    required: false
+    default: ''
