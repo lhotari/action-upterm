@@ -33,6 +33,29 @@ jobs:
 
 To get the ssh connection string, just open the `Checks` tab in your Pull Request and scroll to the bottom.
 
+## Use registered public SSH key(s)
+
+By default anybody can connect to the upterm session. You can opt-in to install the public SSH keys [that you have registered with your GitHub profile](https://docs.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account).
+
+```yaml
+name: CI
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup upterm session
+      uses: lhotari/action-upterm@v1
+      with:
+        ## limits ssh access and adds the ssh public key for the user which triggered the workflow
+        limit-access-to-actor: true
+        ## limits ssh access and adds the ssh public keys of the listed GitHub users
+        limit-access-to-users: githubuser1,githubuser2
+```
+
+If the registered public SSH key is not your default private SSH key, you will need to specify the path manually, like so: `ssh -i <path-to-key> <upterm-connection-string>`.
+
 
 ## Continue a workflow
 
