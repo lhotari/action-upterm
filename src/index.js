@@ -101,6 +101,8 @@ export async function run() {
     await execShellCommand(`tmux new -d -s upterm-wrapper -x 132 -y 43 \"upterm host --server '${uptermServer}' ${authorizedKeysParameter} --force-command 'tmux attach -t upterm' -- tmux new -s upterm -x 132 -y 43\"`)
     await sleep(2000)
     await execShellCommand("tmux send-keys -t upterm-wrapper q C-m")
+    // resize terminal for largest client by default
+    await execShellCommand("tmux set -t upterm-wrapper window-size largest")
     console.debug("Created new session successfully")
 
     core.debug("Fetching connection strings")
