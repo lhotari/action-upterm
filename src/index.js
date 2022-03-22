@@ -8,7 +8,7 @@ const { createActionAuth } = require("@octokit/auth-action");
 
 import { execShellCommand } from "./helpers"
 
-const UPTERM_VERSION = "v0.6.7"
+const UPTERM_VERSION = "v0.7.6"
 
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
