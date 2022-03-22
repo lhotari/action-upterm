@@ -28,12 +28,12 @@
     "@octokit/rest": "^18.9.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.12",
+    "@babel/core": "^7.17.8",
     "@babel/preset-env": "^7.16.11",
     "@vercel/ncc": "^0.24.0",
     "babel-jest": "^26.3.0",
     "jest": "^26.4.2",
     "jest-circus": "^26.4.2",
-    "jest-when": "^3.5.0"
+    "jest-when": "^3.5.1"
   }
 }
