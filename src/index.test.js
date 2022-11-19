@@ -5,7 +5,10 @@ import * as core from "@actions/core"
 jest.mock("fs", () => ({
   mkdirSync: () => true,
   existsSync: () => true,
-  appendFileSync: () => true
+  appendFileSync: () => true,
+  promises: {
+    access: jest.fn()
+  }
 }));
 jest.mock('./helpers');
 import { execShellCommand } from "./helpers"
