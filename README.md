@@ -28,7 +28,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Setup upterm session
-      uses: lhotari/action-upterm@v1
+      ## v1.1 is the latest version
+      uses: lhotari/action-upterm@v1.1
 ```
 
 To get the ssh connection string, just open the `Checks` tab in your Pull Request and scroll to the bottom.
@@ -78,6 +79,32 @@ jobs:
         limit-access-to-actor: true
         ## Use the Heroku deployed Uptermd server via Websocket
         upterm-server: wss://YOUR_HEROKU_APP_URL
+```
+
+## Shut down server if user doesn't connect
+
+If you'd like to shut down the server after a certain number of minutes if no
+user connects, use the `wait-timeout-minutes` input parameter. This can be
+useful for using `action-upterm` to get a debug shell if your job fails, but
+not have the debug shell keep your pipeline running for too long if no one is
+interested in debugging it.
+
+This was introduced in v1.1.
+
+```yaml
+name: CI
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup upterm session
+      uses: lhotari/action-upterm@v1.1
+      if: ${{ failure() }}
+      with:
+        ## If no one connects after 5 minutes, shut down server.
+        wait-timeout-minutes: 5
 ```
 
 ## Continue a workflow

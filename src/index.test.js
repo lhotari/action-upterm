@@ -36,6 +36,7 @@ describe('upterm GitHub integration', () => {
     })
     when(core.getInput).calledWith("limit-access-to-users").mockReturnValue("")
     when(core.getInput).calledWith("limit-access-to-actor").mockReturnValue("false")
+    when(core.getInput).calledWith("wait-timeout-minutes").mockReturnValue("")
     when(core.getInput).calledWith("upterm-server").mockReturnValue("ssh://myserver:22")
     const customConnectionString = "foobar"
     execShellCommand.mockReturnValue(Promise.resolve(customConnectionString))
@@ -53,6 +54,7 @@ describe('upterm GitHub integration', () => {
     })
     when(core.getInput).calledWith("limit-access-to-users").mockReturnValue("")
     when(core.getInput).calledWith("limit-access-to-actor").mockReturnValue("false")
+    when(core.getInput).calledWith("wait-timeout-minutes").mockReturnValue("")
     when(core.getInput).calledWith("upterm-server").mockReturnValue("ssh://myserver:22")
     when(core.getInput).calledWith("ssh-known-hosts").mockReturnValueOnce("known hosts content")
     const customConnectionString = "foobar"
@@ -72,6 +74,7 @@ describe('upterm GitHub integration', () => {
     })
     when(core.getInput).calledWith("limit-access-to-users").mockReturnValue("")
     when(core.getInput).calledWith("limit-access-to-actor").mockReturnValue("false")
+    when(core.getInput).calledWith("wait-timeout-minutes").mockReturnValue("")
     when(core.getInput).calledWith("upterm-server").mockReturnValue("ssh://myserver:22")
     const customConnectionString = "foobar"
     execShellCommand.mockReturnValue(Promise.resolve(customConnectionString))
