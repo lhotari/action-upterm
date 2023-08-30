@@ -28,8 +28,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Setup upterm session
-      ## v1.1 is the latest version
-      uses: lhotari/action-upterm@v1.1
+      uses: lhotari/action-upterm@v1
 ```
 
 To get the ssh connection string, just open the `Checks` tab in your Pull Request and scroll to the bottom.
@@ -89,8 +88,6 @@ useful for using `action-upterm` to get a debug shell if your job fails, but
 not have the debug shell keep your pipeline running for too long if no one is
 interested in debugging it.
 
-This was introduced in v1.1.
-
 ```yaml
 name: CI
 on: [push]
@@ -100,7 +97,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Setup upterm session
-      uses: lhotari/action-upterm@v1.1
+      uses: lhotari/action-upterm@v1
       if: ${{ failure() }}
       with:
         ## If no one connects after 5 minutes, shut down server.
