@@ -99,6 +99,7 @@ export async function run() {
     }
 
     const uptermServer = core.getInput("upterm-server")
+    const waitTimeoutMinutes = core.getInput("wait-timeout-minutes")
     core.info(`Creating a new session. Connecting to upterm server ${uptermServer}`)
     await execShellCommand(`tmux new -d -s upterm-wrapper -x 132 -y 43 \"upterm host --server '${uptermServer}' ${authorizedKeysParameter} --force-command 'tmux attach -t upterm' -- tmux new -s upterm -x 132 -y 43\"`)
     await sleep(2000)
@@ -106,6 +107,17 @@ export async function run() {
     // resize terminal for largest client by default
     await execShellCommand("tmux set -t upterm-wrapper window-size largest; tmux set -t upterm window-size largest")
     console.debug("Created new session successfully")
+    if (waitTimeoutMinutes !== "") {
+      let timeout;
+      try {
+        timeout = parseInt(waitTimeoutMinutes)
+      } catch (error) {
+        core.error(`wait-timeout-minutes must be set to an integer. Error: ${error}`)
+        throw(error)
+      }
+      await execShellCommand(`( sleep $(( ${timeout} * 60 )); if ! pgrep -f '^tmux attach ' &>/dev/null; then tmux kill-server; fi ) & disown`)
+      core.info(`wait-timeout-minutes set - will wait for ${waitTimeoutMinutes} minutes for someone to connect, otherwise shut down`)
+    }
 
     core.debug("Fetching connection strings")
     await sleep(1000)
