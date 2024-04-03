@@ -3,3 +3,4 @@ __tests__/runner/*
 package-lock.json
 coverage/
 .idea/
+.DS_Store
