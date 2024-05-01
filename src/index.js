@@ -8,8 +8,6 @@ const { createActionAuth } = require("@octokit/auth-action");
 
 import { execShellCommand } from "./helpers"
 
-const UPTERM_VERSION = "v0.7.6"
-
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 export async function run() {
@@ -21,7 +19,7 @@ export async function run() {
 
     core.debug("Installing dependencies")
     if (process.platform == "linux") {
-      await execShellCommand(`curl -sL https://github.com/owenthereal/upterm/releases/download/${UPTERM_VERSION}/upterm_linux_amd64.tar.gz | tar zxvf - -C /tmp upterm && sudo install /tmp/upterm /usr/local/bin/`)
+      await execShellCommand(`curl -sL https://github.com/owenthereal/upterm/releases/latest/download/upterm_linux_amd64.tar.gz | tar zxvf - -C /tmp upterm && sudo install /tmp/upterm /usr/local/bin/`)
       await execShellCommand("if ! command -v tmux &>/dev/null; then sudo apt-get -y install tmux; fi")
     } else {
       await execShellCommand("brew install owenthereal/upterm/upterm")
