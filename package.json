@@ -30,7 +30,7 @@
   "devDependencies": {
     "@babel/core": "^7.17.8",
     "@babel/preset-env": "^7.16.11",
-    "@vercel/ncc": "^0.24.0",
+    "@vercel/ncc": "^0.38.2",
     "babel-jest": "^26.3.0",
     "jest": "^26.4.2",
     "jest-circus": "^26.4.2",
