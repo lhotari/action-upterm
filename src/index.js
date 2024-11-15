@@ -10,7 +10,7 @@ import { execShellCommand } from "./helpers"
 
 const UPTERM_VERSION = "v0.7.6"
 const UPTERM_LINUX_RELEASE_BASENAMES = {
-  x86: "upterm_linux_amd64",
+  x64: "upterm_linux_amd64",
   arm64: "upterm_linux_arm64",
 }
 
