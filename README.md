@@ -1,5 +1,8 @@
 # Debug your [GitHub Actions](https://github.com/features/actions) by using ssh
 
+> [!IMPORTANT]
+> This action is deprecated. Please use https://github.com/owenthereal/action-upterm instead.
+
 This GitHub Action offers you a direct way to interact with the host system on which the actual scripts (Actions) will run.
 This action started as a fork of [mxschmitt/action-tmate](https://github.com/mxschmitt/action-tmate).
 Instead of tmate, this action uses [upterm](https://upterm.dev/) and [tmux](https://github.com/tmux/tmux/wiki).
